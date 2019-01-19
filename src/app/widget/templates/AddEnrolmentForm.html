@@ -21,50 +21,53 @@
 			</td>
 			<td>
         <span style="padding-right: 5px; color: red">*</span>
-				<input disabled=${isEnrollDateDsiabled} type="text" data-dojo-attach-point="enrollDateDom" data-dojo-type="dijit/form/DateTextBox" data-dojo-props="required:true" constraints="{datePattern:'dd/MM/yyyy'}"></input>
+				<input disabled=${isEnrollDateDisabled} type="text" data-dojo-attach-point="enrollDateDom" data-dojo-type="dijit/form/DateTextBox" data-dojo-props="required:true" constraints="{datePattern:'dd/MM/yyyy'}"></input>
 			</td>
 		</tr>
-    <tr data-dojo-attach-point="schoolTr" style="display:none">
+    <tr data-dojo-attach-point="schoolTr" class="hidden">
 			<td>
 				<label for="school">School</label>
 			</td>
 			<td>
         <span style="padding-right: 5px; color: red">*</span>
         <select
+          disabled=${isSchoolDisabled}
           data-dojo-attach-point="schoolDom"
           data-dojo-props="required:true"
 					data-dojo-type="dijit/form/Select" />
         </select>
-        <button class="dijitReset dijitInline dijitIcon dijitIconConfigure" data-dojo-attach-event="onclick: onShowSchoolLog" type="button" />
+        <button class="dijitInline dijitIcon dijitIconConfigure" data-dojo-attach-event="onclick: onShowSchoolLog" type="button" />
 			</td>
 		</tr>
-    <tr data-dojo-attach-point="yearLevelTr" style="display:none">
+    <tr data-dojo-attach-point="yearLevelTr" class="hidden">
 			<td>
 				<label for="yearLevel">Year Level</label>
 			</td>
 			<td>
         <span style="padding-right: 5px; color: red">*</span>
         <select
+          disabled=${isYearLevelDisabled}
           data-dojo-attach-point="yearLevelDom"
           data-dojo-props="required:true"
 					data-dojo-type="dijit/form/Select" />
         </select>
 			</td>
 		</tr>
-    <tr data-dojo-attach-point="yearTr" style="display:none">
+    <tr data-dojo-attach-point="yearTr" class="hidden">
 			<td>
 				<label for="year">Year</label>
 			</td>
 			<td>
         <span style="padding-right: 5px; color: red">*</span>
         <select
+          disabled=${isYearDisabled}
           data-dojo-attach-point="yearDom"
           data-dojo-props="required:true"
 					data-dojo-type="dijit/form/Select" />
         </select>
 			</td>
 		</tr>
-		<tr>
+		<tr class=${actionsClass}>
 			<td colspan="3" class="text-right">
         <button class="secondary-btn" data-dojo-attach-event="onclick: onCancel">Cancel</button>
 				<button class="primary-btn" data-dojo-attach-event="onclick: onAdd">Apply</button>

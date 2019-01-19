@@ -3,19 +3,21 @@ define([
   "dojo/_base/lang",
   "dojo/_base/array",
   "dojo/on",
-  "dojo/dom-style",
+  "dojo/dom-class",
   "dojo/dom-construct",
   "dijit/_Widget",
-  "./AddEnrolmentForm"
+  "./AddEnrolmentForm",
+  "./EnrolmentAction"
 ], function(
   declare,
   lang,
   array,
   on,
-  domStyle,
+  domClass,
   domConstruct,
   _Widget,
-  AddEnrolmentForm
+  AddEnrolmentForm,
+  EnrolmentAction
 ) {
   const EnrolmentItem = declare("EnrolmentItem", _Widget, {
     domNode: null,
@@ -38,7 +40,13 @@ define([
       this.renderEditPanel();
     },
     renderItemBar: function() {
-      const { programName, enrollDate, status } = this.enrolmentInfo;
+      const {
+        id,
+        programName,
+        enrollDate,
+        terminateDate,
+        status
+      } = this.enrolmentInfo;
       const itemBar = domConstruct.create(
         "div",
         { className: "item" },
@@ -56,7 +64,9 @@ define([
         "span",
         {
           className: "date",
-          innerHTML: (new Date(enrollDate)).toISOString().substring(0, 10)
+          innerHTML: new Date(status === "Active" ? enrollDate : terminateDate)
+            .toISOString()
+            .substring(0, 10)
         },
         itemBar
       );
@@ -68,14 +78,21 @@ define([
         },
         itemBar
       );
+      new EnrolmentAction(
+        {
+          status,
+          handleTerminate: lang.hitch(this, this.onUpdate),
+          handleReactive: lang.hitch(this, this.onUpdate)
+        },
+        itemBar
+      );
       on(itemBar, "click", lang.hitch(this, this.toggleEditPanel));
     },
     renderEditPanel: function() {
       this.editPanelContainer = domConstruct.create(
         "div",
         {
-          className: "edit-panel",
-          style: "display: none"
+          className: "edit-panel hidden"
         },
         this.containerNode
       );
@@ -85,12 +102,12 @@ define([
         enrollDate,
         school,
         yearLevel,
-        year
+        year,
+        status
       } = this.enrolmentInfo;
       const addEnrolmentForm = new AddEnrolmentForm({
         store: this.store,
-        isProgramDisabled: true,
-        isEnrollDateDsiabled: true,
+        mode: status === "Active" ? "edit" : "view",
         defaultValues: {
           program: programId,
           enrollDate,
@@ -104,8 +121,7 @@ define([
       this.editPanelContainer.appendChild(addEnrolmentForm.domNode);
     },
     toggleEditPanel: function() {
-      const isShow = domStyle.get(this.editPanelContainer, "display") !== "none";
-      domStyle.set(this.editPanelContainer, "display", isShow ? "none" : "");
+      domClass.toggle(this.editPanelContainer, "hidden");
     },
     onUpdate: function(data) {
       this.handleUpdateEnrolment(this.enrolmentInfo.id, data);

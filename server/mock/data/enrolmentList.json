@@ -16,5 +16,16 @@
     "programName": "High School",
     "enrollDate": 1547767633142,
     "school": 4
+  },
+  {
+    "id": 3,
+    "status": "Terminated",
+    "programId": 1,
+    "programName": "School Dental Service",
+    "enrollDate": 1547767633142,
+    "terminateDate": 1547874540943,
+    "school": 2,
+    "yearLevel": 14,
+    "year": 2018
   }
 ]

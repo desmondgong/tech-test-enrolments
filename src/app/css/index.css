@@ -40,6 +40,9 @@
 .text-right {
   text-align: right;
 }
+.hidden {
+  display: none;
+}
 button {
   color: #fff;
   cursor: pointer;

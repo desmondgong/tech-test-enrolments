@@ -2,7 +2,7 @@ define([
   "dojo/_base/declare",
   "dojo/_base/lang",
   "dojo/_base/array",
-  "dojo/dom-style",
+  "dojo/dom-class",
   "dojo/dom-construct",
   "dijit/popup",
   "dijit/_Widget",
@@ -20,7 +20,7 @@ define([
   declare,
   lang,
   array,
-  domStyle,
+  domClass,
   domConstruct,
   popup,
   _Widget,
@@ -35,13 +35,36 @@ define([
     [_Widget, _TemplatedMixin, _WidgetsInTemplateMixin],
     {
       enrolmentOpts: {},
+      mode: "add",
       isProgramDisabled: false,
-      isEnrollDateDsiabled: false,
+      isEnrollDateDisabled: false,
+      isSchoolDisabled: false,
+      isYearLevelDisabled: false,
+      isYearDisabled: false,
+      actionsClass: "",
       templateString: template,
       isSchool: false,
       isYearMandatory: false,
       defaultValues: {},
       store: null,
+      constructor: function(opts) {
+        lang.mixin(this, opts);
+        switch (opts.mode) {
+          case "edit":
+            this.isProgramDisabled = true;
+            this.isEnrollDateDisabled = true;
+            break;
+          case "view":
+            this.isProgramDisabled = true;
+            this.isEnrollDateDisabled = true;
+            this.isSchoolDisabled = true;
+            this.isYearLevelDisabled = true;
+            this.isYearDisabled = true;
+            this.actionsClass = "hidden";
+            break;
+          default:
+        }
+      },
       postCreate: function() {
         this.inherited(arguments);
         this.store
@@ -106,19 +129,27 @@ define([
         this.yearDom.set("value", this.defaultValues.year || 2016);
       },
       onProgramChange: function(value) {
-        array.forEach(this.enrolmentOpts.program, ({ id, isSchool, isYearMandatory }) => {
-          if (id === value) {
-            this.isSchool = isSchool;
-            domStyle.set(this.schoolTr, "display", isSchool ? "" : "none");
-            this.isYearMandatory = isYearMandatory;
-            domStyle.set(
-              this.yearLevelTr,
-              "display",
-              isYearMandatory ? "" : "none"
-            );
-            domStyle.set(this.yearTr, "display", isYearMandatory ? "" : "none");
+        array.forEach(
+          this.enrolmentOpts.program,
+          ({ id, isSchool, isYearMandatory }) => {
+            if (id === value) {
+              this.isSchool = isSchool;
+              if (isSchool) {
+                domClass.remove(this.schoolTr, "hidden");
+              } else {
+                domClass.add(this.schoolTr, "hidden");
+              }
+              this.isYearMandatory = isYearMandatory;
+              if (isYearMandatory) {
+                domClass.remove(this.yearLevelTr, "hidden");
+                domClass.remove(this.yearTr, "hidden");
+              } else {
+                domClass.add(this.yearLevelTr, "hidden");
+                domClass.add(this.yearTr, "hidden");
+              }
+            }
           }
-        });
+        );
       },
       onAdd: function() {
         if (

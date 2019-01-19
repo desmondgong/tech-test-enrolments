@@ -1,0 +1,38 @@
+<div>
+  <fieldset>
+    <legend>Enrolment Termination</legend>
+    <table>
+      <tr>
+        <td>
+  				<label for="terminateDateDom">Termination Date</label>
+  			</td>
+  			<td>
+          <span style="padding-right: 5px; color: red">*</span>
+          <input type="text" value="now"
+            data-dojo-attach-point="terminateDateDom"
+            data-dojo-type="dijit/form/DateTextBox"
+            data-dojo-props="required:true"
+            constraints="{datePattern:'dd/MM/yyyy'}">
+          </input>
+  			</td>
+      </tr>
+      <tr>
+        <td>
+  				<label for="terminateStatusDom">Termination Status</label>
+  			</td>
+  			<td>
+          <span style="padding-right: 5px; color: red">*</span>
+          <select
+            data-dojo-attach-point="terminateStatusDom"
+            data-dojo-props="required:true"
+  					data-dojo-type="dijit/form/Select">
+            <option value="Withdrawn Consent">Withdrawn Consent</option>
+          </select>
+  			</td>
+      </tr>
+    </table>
+  </fieldset>
+  <div class="text-right">
+    <button class="secondary-btn" data-dojo-attach-event="onclick: onTerminate">Save</button>
+  </div>
+</div>
