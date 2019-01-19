@@ -40,6 +40,9 @@ define([
         method: "POST",
         handleAs: "json"
       });
+    },
+    fetchSchoolLog: function() {
+      return request(this.routes.getSchoolLog, { handleAs: "json" });
     }
   });
   return EnrolmentStore;

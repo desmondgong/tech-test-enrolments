@@ -17,7 +17,7 @@ define([
   _Widget,
   AddEnrolmentForm
 ) {
-  var EnrolmentItem = declare("EnrolmentItem", _Widget, {
+  const EnrolmentItem = declare("EnrolmentItem", _Widget, {
     domNode: null,
     store: null,
     containerNode: null,

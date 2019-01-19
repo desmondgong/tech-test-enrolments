@@ -20,6 +20,23 @@
   width: 100%;
   padding-top: 20px;
 }
+.school-log-container {
+  padding: 10px;
+}
+.school-log-container .log-title {
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+.school-log-container .log-table {
+  width: 100%;
+}
+.school-log-container .log-table th {
+  color: white;
+  background-color: royalblue;
+}
+.school-log-container .log-table tr.data td {
+  border-bottom: 1px solid #9f9f9f;
+}
 .text-right {
   text-align: right;
 }

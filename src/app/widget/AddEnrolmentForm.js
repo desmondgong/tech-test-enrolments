@@ -3,10 +3,14 @@ define([
   "dojo/_base/lang",
   "dojo/_base/array",
   "dojo/dom-style",
+  "dojo/dom-construct",
+  "dijit/popup",
   "dijit/_Widget",
   "dijit/_TemplatedMixin",
   "dijit/_WidgetsInTemplateMixin",
   "dojo/text!/app/widget/templates/AddEnrolmentForm.html",
+  "./SchoolLog",
+  "dijit/TooltipDialog",
   "dijit/form/Form",
   "dijit/form/TextBox",
   "dijit/form/Select",
@@ -17,16 +21,20 @@ define([
   lang,
   array,
   domStyle,
+  domConstruct,
+  popup,
   _Widget,
   _TemplatedMixin,
   _WidgetsInTemplateMixin,
-  template
+  template,
+  SchoolLog,
+  TooltipDialog
 ) {
   var AddEnrolmentForm = declare(
     "AddEnrolmentForm",
     [_Widget, _TemplatedMixin, _WidgetsInTemplateMixin],
     {
-      programOpts: [],
+      enrolmentOpts: {},
       isProgramDisabled: false,
       isEnrollDateDsiabled: false,
       templateString: template,
@@ -44,7 +52,7 @@ define([
       handleCancel: function() {},
       handleLoadOpts: function(response) {
         const { program, school, yearLevel, year } = response;
-        this.programOpts = program;
+        this.enrolmentOpts = response;
         const defaultOption = {
           label: "Please select",
           value: "",
@@ -98,7 +106,7 @@ define([
         this.yearDom.set("value", this.defaultValues.year || 2016);
       },
       onProgramChange: function(value) {
-        array.forEach(this.programOpts, ({ id, isSchool, isYearMandatory }) => {
+        array.forEach(this.enrolmentOpts.program, ({ id, isSchool, isYearMandatory }) => {
           if (id === value) {
             this.isSchool = isSchool;
             domStyle.set(this.schoolTr, "display", isSchool ? "" : "none");
@@ -136,6 +144,29 @@ define([
       onCancel: function() {
         this.resetForm();
         this.handleCancel();
+      },
+      onShowSchoolLog: function(event) {
+        this.store.fetchSchoolLog().then(log => {
+          const tooltipContent = domConstruct.create("div", {});
+          const schoolLog = new SchoolLog(
+            {
+              logData: log,
+              enrolmentOpts: this.enrolmentOpts
+            },
+            tooltipContent
+          );
+          const schoolLogTooltip = new TooltipDialog({
+            content: tooltipContent,
+            style: "width: 500px;",
+            onMouseLeave: function() {
+              popup.close(schoolLogTooltip);
+            }
+          });
+          popup.open({
+            popup: schoolLogTooltip,
+            around: event.target
+          });
+        });
       }
     }
   );
