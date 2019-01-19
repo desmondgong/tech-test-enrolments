@@ -1,0 +1,73 @@
+<div data-dojo-type="dijit/form/Form">
+  <table class="enrolment-form" style="" cellspacing="10">
+		<tr>
+			<td>
+				<label for="programName">Program</label>
+			</td>
+			<td>
+        <span style="padding-right: 5px; color: red">*</span>
+        <select
+          disabled=${isProgramDisabled}
+          data-dojo-attach-point="programNameDom"
+          data-dojo-attach-event="onChange: onProgramChange"
+          data-dojo-props="required:true"
+					data-dojo-type="dijit/form/Select" />
+        </select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="enrollDate">Enrolment Date</label>
+			</td>
+			<td>
+        <span style="padding-right: 5px; color: red">*</span>
+				<input disabled=${isEnrollDateDsiabled} type="text" data-dojo-attach-point="enrollDateDom" data-dojo-type="dijit/form/DateTextBox" data-dojo-props="required:true" constraints="{datePattern:'dd/MM/yyyy'}"></input>
+			</td>
+		</tr>
+    <tr data-dojo-attach-point="schoolTr" style="display:none">
+			<td>
+				<label for="school">School</label>
+			</td>
+			<td>
+        <span style="padding-right: 5px; color: red">*</span>
+        <select
+          data-dojo-attach-point="schoolDom"
+          data-dojo-props="required:true"
+					data-dojo-type="dijit/form/Select" />
+        </select>
+			</td>
+		</tr>
+    <tr data-dojo-attach-point="yearLevelTr" style="display:none">
+			<td>
+				<label for="yearLevel">Year Level</label>
+			</td>
+			<td>
+        <span style="padding-right: 5px; color: red">*</span>
+        <select
+          data-dojo-attach-point="yearLevelDom"
+          data-dojo-props="required:true"
+					data-dojo-type="dijit/form/Select" />
+        </select>
+			</td>
+		</tr>
+    <tr data-dojo-attach-point="yearTr" style="display:none">
+			<td>
+				<label for="year">Year</label>
+			</td>
+			<td>
+        <span style="padding-right: 5px; color: red">*</span>
+        <select
+          data-dojo-attach-point="yearDom"
+          data-dojo-props="required:true"
+					data-dojo-type="dijit/form/Select" />
+        </select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="text-right">
+        <button class="secondary-btn" data-dojo-attach-event="onclick: onCancel">Cancel</button>
+				<button class="primary-btn" data-dojo-attach-event="onclick: onAdd">Apply</button>
+			</td>
+		</tr>
+	</table>
+</div>

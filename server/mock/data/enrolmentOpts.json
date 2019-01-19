@@ -1,0 +1,68 @@
+{
+  "program": [
+    {
+      "id": 1,
+      "name": "School Dental Service",
+      "isSchool": true,
+      "isYearMandatory": true
+    },
+    {
+      "id": 2,
+      "name": "High School",
+      "isSchool": true,
+      "isYearMandatory": false
+    },
+    {
+      "id": 3,
+      "name": "Special Needs Program",
+      "isSchool": false,
+      "isYearMandatory": false
+    }
+  ],
+  "school": [
+    {
+      "id": 1,
+      "name": "Long Bay College"
+    },
+    {
+      "id": 2,
+      "name": "University of Auckland"
+    },
+    {
+      "id": 3,
+      "name": "AUT"
+    },
+    {
+      "id": 4,
+      "name": "Auckland Grammar School"
+    }
+  ],
+  "yearLevel": [
+    {
+      "id": 13,
+      "name": "Year 13"
+    },
+    {
+      "id": 14,
+      "name": "Year 14"
+    },
+    {
+      "id": 15,
+      "name": "Year 15"
+    }
+  ],
+  "year": [
+    {
+      "id": 2016,
+      "name": "2016"
+    },
+    {
+      "id": 2017,
+      "name": "2017"
+    },
+    {
+      "id": 2018,
+      "name": "2018"
+    }
+  ]
+}
