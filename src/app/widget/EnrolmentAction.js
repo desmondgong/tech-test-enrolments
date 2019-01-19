@@ -54,11 +54,13 @@ define([
     showTerminatePanel: function(event) {
       event.stopPropagation();
       const terminateTooltip = new TooltipDialog({
-        content: new EnrolmentTerminationPanel({ handleTerminate: this.handleTerminate }),
-        style: "width: 500px;",
-        onMouseLeave: function() {
-          popup.close(terminateTooltip);
-        }
+        content: new EnrolmentTerminationPanel({
+          handleTerminate: this.handleTerminate,
+          handleCancel: function() {
+            popup.close(terminateTooltip);
+          }
+        }),
+        style: "width: 500px;"
       });
       popup.open({
         popup: terminateTooltip,
@@ -68,7 +70,9 @@ define([
     showReactivePanel: function() {
       event.stopPropagation();
       const reactiveTooltip = new TooltipDialog({
-        content: new EnrolmentReactivationPanel({ handleReactive: this.handleReactive }),
+        content: new EnrolmentReactivationPanel({
+          handleReactive: this.handleReactive
+        }),
         style: "width: 400px;",
         onMouseLeave: function() {
           popup.close(reactiveTooltip);

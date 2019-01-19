@@ -20,6 +20,7 @@ define([
     {
       templateString: template,
       handleTerminate: function(data) {},
+      handleCancel: function() {}, 
       onTerminate: function() {
         if (!this.terminateDateDom.value || !this.terminateStatusDom.value) {
           //TODO handle validation failed!
