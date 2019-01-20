@@ -159,8 +159,7 @@ define([
           (this.isYearMandatory &&
             (!this.yearDom.value || !this.yearLevelDom.value))
         ) {
-          //TODO handle validation failed!
-          console.log("Some required fields are empty");
+          alert("Some required fields are empty");
           return;
         }
         const applyData = {

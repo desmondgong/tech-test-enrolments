@@ -6,7 +6,7 @@ define([
   "../constants/Routes"
 ], (declare, lang, request, Deferred, Routes) => {
   const EnrolmentStore = declare("EnrolmentStore", null, {
-    routes: new Routes(),
+    routes: Routes,
     enrolmentOpts: null,
     constructor: function(opt) {
       lang.mixin(this, opt);

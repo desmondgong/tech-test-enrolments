@@ -55,7 +55,10 @@ define([
       event.stopPropagation();
       const terminateTooltip = new TooltipDialog({
         content: new EnrolmentTerminationPanel({
-          handleTerminate: this.handleTerminate,
+          handleTerminate: data => {
+            this.handleTerminate(data);
+            popup.close(terminateTooltip);
+          },
           handleCancel: function() {
             popup.close(terminateTooltip);
           }

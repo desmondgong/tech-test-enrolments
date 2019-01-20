@@ -1,10 +1,4 @@
-define([
-  "dojo/ready",
-  "./constants/Routes",
-  "./widget/EnrolmentList"
-], function(ready, Routes, EnrolmentList) {
-  const routes = new Routes();
-
+define(["dojo/ready", "./widget/EnrolmentList"], (ready, EnrolmentList) => {
   ready(function() {
     const containerNode = document.getElementById("root");
     const enrolmentList = new EnrolmentList({}, containerNode);

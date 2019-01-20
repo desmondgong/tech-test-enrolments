@@ -20,11 +20,10 @@ define([
     {
       templateString: template,
       handleTerminate: function(data) {},
-      handleCancel: function() {}, 
+      handleCancel: function() {},
       onTerminate: function() {
         if (!this.terminateDateDom.value || !this.terminateStatusDom.value) {
-          //TODO handle validation failed!
-          console.log("Some required fields are empty");
+          alert("Some required fields are empty");
           return;
         }
         const applyData = {
